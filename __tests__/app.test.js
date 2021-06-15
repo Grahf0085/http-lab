@@ -16,7 +16,7 @@ describe('app routes', () => {
 
     const res = await request(app).get('/echo');
 
-    expect(res.text).toEqual('bye');
+    expect(res.text).toEqual('\r');
     expect(res.statusCode).toEqual(200);
     expect(res.type).toEqual('plain text');
   });
