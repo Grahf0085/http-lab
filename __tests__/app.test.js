@@ -14,9 +14,11 @@ describe('app routes', () => {
 
   it('test echo', async() => {
 
-    const res = await request(app).get('/echo');
+    const res = await request(app)
+    .post('/echo')
+    .send('bleh');
 
-    expect(res.text).toEqual('\r');
+    expect(res.text).toEqual('bleh');
     expect(res.statusCode).toEqual(200);
     expect(res.type).toEqual('plain text');
   });
