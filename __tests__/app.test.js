@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 const request = require('supertest');
 const app = require('../lib/app');
+const fsPromise = require('fs/promises');
 
 describe('app routes', () => {
 
@@ -64,5 +65,32 @@ describe('app routes', () => {
 </html>`);
   });
 
+
+});
+
+describe('promise routes', () => {
+
+  it('public folder index.html file', async() => {
+    const res = await request(app).get('/index.html');
+    // console.log(res.text);
+    const expected = await fsPromise.readFile('public/index.html', 'utf-8');
+    // console.log(expected);
+
+    expect(res.status).toBe(200);
+    expect(res.text).toEqual(expected);
+//     expect(res.type).toEqual(
+// `<!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8">
+//   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+//   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//   <title>Home</title>
+// </head>
+// <body>
+//   <h1>Index HTML</h1>
+// </body>
+// </html>`);
+  });
 
 });
