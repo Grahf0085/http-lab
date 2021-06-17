@@ -73,10 +73,19 @@ describe('promise routes', () => {
 
   it('public folder index.html file', async() => {
     const res = await request(app).get('/index.html');
-    const expected = await fsPromise.readFile('public/index.html', 'utf-8');
+    const expected = await fsPromise.readFile('public/index.html', 'utf8');
 
     expect(res.status).toEqual(200);
     expect(res.text).toEqual(expected);
   });
+
+  // it('fails to find index.html', async() => {
+  //   const res = await request(app).get('/index.html');
+  //   const resTwo = await fsPromise.writeFile('public/index.html', 'blah');
+  //   console.log(resTwo);
+
+  //   expect(res.status).toEqual(404);
+  //   expect(res.text).toEqual('File Not Found');
+  // });
 
 });
